@@ -22,6 +22,14 @@ class Test_WordSearchLetter:
             WordSearchLetter("1", XYCoord(0, 0))
         assert "must be a capital letter" in str(e.value)
 
+    def test_wordsearchletter_non_xycoord_fail(self):
+        """
+        Can't init with anything other than XYCoord for coordinates
+        """
+        with pytest.raises(ValueError) as e:
+            WordSearchLetter("1", list())
+        assert "must be an XYCoord instance" in str(e.value)
+
     def test_wordsearchletter_non_int_coordinate_fail(self):
         """
         Can't init coordinates with anything other than positive integers

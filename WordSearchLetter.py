@@ -21,6 +21,3 @@ class WordSearchLetter(object):
 
     def __str__(self):
         return self.letter
-
-    def getCoordStr(self):
-        return str(self.coord)

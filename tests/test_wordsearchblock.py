@@ -125,3 +125,37 @@ class Test_WordSearchBlock:
         assert results[5] == 'REEL: (2,4),(3,3),(4,2),(5,1)'
         assert results[6] == 'FAX: (5,2),(4,3),(3,4)'
         assert results[7] == 'ADD: (0,1),(1,2),(2,3)'
+
+class TestInitFailures:
+    def test_word_search_block_init_fail(self):
+        """
+        Try to init with unequal rows
+        """
+        rawblock = list()
+        #Words in here are:  FOOD, ADD, BEEF, LEER
+        rawblock.append("F,O,O,D,X,Y".split(","))
+        rawblock.append("A,X,Z,U,L".split(","))
+        rawblock.append("B,D,B,E,E,F".split(","))
+        rawblock.append("S,C,D,E,A,M".split(","))
+        rawblock.append("X,X,R,X,X,X".split(","))
+        rawblock.append("Q,Q,Q,Q,Q,Q".split(","))
+
+        with pytest.raises(ValueError) as e:
+            wsb = WordSearchBlock(rawblock)
+        assert "length of each row of letters must be the same" in str(e.value)       
+
+    def test_word_search_block_init_fail_height(self):
+        """
+        Try to init with unequal height
+        """
+        rawblock = list()
+        #Words in here are:  FOOD, ADD, BEEF, LEER
+        rawblock.append("F,O,O,D,X,Y".split(","))
+        rawblock.append("A,X,Z,U,L,A".split(","))
+        rawblock.append("B,D,B,E,E,F".split(","))
+        rawblock.append("S,C,D,E,A,M".split(","))
+        rawblock.append("X,X,R,X,X,X".split(","))
+
+        with pytest.raises(ValueError) as e:
+            wsb = WordSearchBlock(rawblock)
+        assert "The length of each row of letters must match the height of the block" in str(e.value)     

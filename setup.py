@@ -10,6 +10,6 @@ setup(
         'pytest-runner',
     ],
     tests_require=[
-        'pytest',
+        'pytest', 'pytest-cov', 'coverage'
     ],
 )

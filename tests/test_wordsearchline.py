@@ -11,6 +11,16 @@ class TestWordSearchLine_BasicTests:
         wsl = WordSearchLine(line)
         assert isinstance(wsl, WordSearchLine)
 
+    def test_init_fail_if_not_list(self):
+        with pytest.raises(ValueError) as e:
+            WordSearchLine("string")
+        assert "must contain a list of WordSearchLetter objects" in str(e.value)
+
+    def test_init_fail_if_not_list_of_WordSearchLetters(self):
+        with pytest.raises(ValueError) as e:
+            WordSearchLine(list("abc"))
+        assert "must contain a list of WordSearchLetter objects" in str(e.value)
+
     def test_getstring(self):
         line = [WordSearchLetter(x, XYCoord(0, 0)) for x in "ABCHELLOXYZ"]
         wsl = WordSearchLine(line)
@@ -44,6 +54,27 @@ class TestWordSearchLine_BasicTests:
         assert "FISH" not in wsl
         assert len(wsl.matches) == 0
 
+    def test_get_result_as_string(self):
+        """
+        test get_result_as_string function
+        """
+        line = [WordSearchLetter(x, XYCoord(0, 0)) for x in "ABCHELLOXYZ"]
+        wsl = WordSearchLine(line)
+        assert "HELLO" in wsl
+        assert len(wsl.matches) == 1
+        assert wsl.get_result_as_string(0) == "HELLO: (0,0),(0,0),(0,0),(0,0),(0,0)"
+
+    def test_get_result_as_string_outside_array(self):
+        """
+        test get_result_as_string function
+        """
+        line = [WordSearchLetter(x, XYCoord(0, 0)) for x in "ABCHELLOXYZ"]
+        wsl = WordSearchLine(line)
+        assert "HELLO" in wsl
+        assert len(wsl.matches) == 1
+        with pytest.raises(ValueError) as e:
+            wsl.get_result_as_string(100)
+        assert "index is outside of matches array" in str(e.value)
 
 class TestWordSearchLine_SCOTTY:
     def setup_class(self):

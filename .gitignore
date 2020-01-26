@@ -1,2 +1,6 @@
 *.pyc
 *.udb
+/.eggs
+/htmlcov
+.coverage
+
