@@ -41,6 +41,13 @@ class Test_WordSearchBlock:
         assert len(row) == 6
         assert row[3].letter == "Q"
 
+    def test_get_all_rows(self):
+        rowtests = ["FOODXY", "AXQZUL", "BDBEEF", "SCDEAM", "XXRXXX", "QQQQQQ"]
+        for i in range(6):
+            row = self.wsb.getRow(i)
+            assert len(row) == 6
+            assert row.toString() == rowtests[i]
+
     def test_get_col(self):
         col = self.wsb.getCol(1)
         assert len(col) == 6
@@ -49,6 +56,13 @@ class Test_WordSearchBlock:
         col = self.wsb.getCol(4)
         assert len(col) == 6
         assert col[3].letter == "A"
+
+    def test_get_all_col(self):
+        coltests = ["FABSXQ", "OXDCXQ", "OQBDRQ", "DZEEXQ", "XUEAXQ", "YLFMXQ"]
+        for i in range(6):
+            col = self.wsb.getCol(i)
+            assert len(col) == 6
+            assert col.toString() == coltests[i]
 
     def test_get_fwd_slash(self):
         fwdslash = self.wsb.getFwdSlash(3)
