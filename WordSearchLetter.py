@@ -4,6 +4,9 @@ class WordSearchLetter(object):
     """
     The WordSearchLetter class is intended to hold a letter and the underlying coordinates of that letter.
     """
+    coord = None
+    letter = None
+
     def __init__(self, letter:str, coord:XYCoord):
         if not (isinstance(coord, XYCoord)):
             raise ValueError("coord must be an XYCoord instance")

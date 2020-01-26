@@ -58,7 +58,7 @@ class TestWordSearchLine_SCOTTY:
         #to init a "line" of WordSearchLetter objects
 
         row = row.split(",")  #there's my list of letters
-        coords = [XYCoord(x,5) for x in range(len(row))]  #there's my list of coords
+        coords = [XYCoord(x,rownum) for x in range(len(row))]  #there's my list of coords
 
         self.line = [WordSearchLetter(let, coord) for let,coord in zip(row,coords)]  #there's my 'line' of WordSearchLetter objects
 
@@ -70,13 +70,9 @@ class TestWordSearchLine_SCOTTY:
         assert "SCOTTY" in wsl
 
     def test_SCOTTY_getmatches(self):
-        wsl = WordSearchLine(self.line)
-        if "SCOTTY" in wsl:
-            assert wsl.matches[0].startpos == 0
-            assert wsl.matches[0].direction == Direction.Forward
-            assert wsl.matches[0].length == 6
-
-    def test_SCOTTY_getmatches(self):
+        """
+        Confirm results indicate start position, length, and direciton
+        """
         wsl = WordSearchLine(self.line)
         if "SCOTTY" in wsl:
             assert wsl.matches[0].startpos == 0
@@ -84,11 +80,64 @@ class TestWordSearchLine_SCOTTY:
             assert wsl.matches[0].length == 6
 
     def test_SCOTTY_getmatches_with_search_method(self):
+        """
+        Confirming that the search method is just as good as the 'in' operator
+        """
         wsl = WordSearchLine(self.line)
         if wsl.search("SCOTTY") == True:
             assert wsl.matches[0].startpos == 0
             assert wsl.matches[0].direction == Direction.Forward
             assert wsl.matches[0].length == 6
 
-    def test_SCOTTY_get_answers(self):
+    def test_SCOTTY_get_answer(self):
         wsl = WordSearchLine(self.line)
+        if wsl.search("SCOTTY") == True:
+            assert wsl.get_result_as_string(0) == "SCOTTY: (0,5),(1,5),(2,5),(3,5),(4,5),(5,5)"
+
+
+class TestWordSearchLine_KIRK:
+    def setup_class(self):
+        """
+        Real test case from kata description, although this one is the word found backwards
+        see SCOTTY test case for description of what is going on here
+        """
+        row = "O,K,R,I,K,A,M,M,R,M,F,B,A,P,P"
+        rownum = 7
+
+        row = row.split(",")  #there's my list of letters
+        coords = [XYCoord(x,rownum) for x in range(len(row))]  #there's my list of coords
+
+        self.line = [WordSearchLetter(let, coord) for let,coord in zip(row,coords)]  #there's my 'line' of WordSearchLetter objects
+
+        assert isinstance(self.line, list)
+
+
+    def test_KIRK_ismember(self):
+        wsl = WordSearchLine(self.line)
+        assert wsl.toString() == "OKRIKAMMRMFBAPP"
+        assert "KIRK" in wsl
+
+    def test_KIRK_getmatches(self):
+        """
+        Confirm results indicate start position, length, and direciton
+        """
+        wsl = WordSearchLine(self.line)
+        if "KIRK" in wsl:
+            assert wsl.matches[0].startpos == 10
+            assert wsl.matches[0].direction == Direction.Backward
+            assert wsl.matches[0].length == 4
+
+    def test_KIRK_getmatches_with_search_method(self):
+        """
+        Confirming that the search method is just as good as the 'in' operator
+        """
+        wsl = WordSearchLine(self.line)
+        if wsl.search("KIRK") == True:
+            assert wsl.matches[0].startpos == 10
+            assert wsl.matches[0].direction == Direction.Backward
+            assert wsl.matches[0].length == 4 
+
+    def test_KIRK_get_answer(self):
+        wsl = WordSearchLine(self.line)
+        if wsl.search("KIRK") == True:
+            assert wsl.get_result_as_string(0) == "KIRK: (4,7),(3,7),(2,7),(1,7)"

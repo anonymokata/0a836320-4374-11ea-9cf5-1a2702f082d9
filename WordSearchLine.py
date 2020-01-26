@@ -18,7 +18,7 @@ class WordSearchLine(object):
     This particular line of text, however, originated from a WordSearch puzzle game.
     The line will be instantiated with a list of WordSearchLetter objects.
     """
-    line = None              #the actual line, the entire line from the word search block
+    line = None              #the actual line, the entire line from the word search block, as WordSearchLetter instances
     matches = None           #list of discovered matches
 
     def __init__(self, line:list):
@@ -46,7 +46,7 @@ class WordSearchLine(object):
 
     def __contains__(self, teststring:str):
         """
-        By using the __contains__ method, the 'in' operator becomes available to users.
+        This will allow the use of the 'in' operator on this list as if it were a string
         """
         me = self.toString()
         me_backwards = me[::-1]    #reverse the string
@@ -68,3 +68,26 @@ class WordSearchLine(object):
             self.searchdirection = None
 
         return found
+
+    def get_result_as_string(self, index):
+        """
+        Helper method -- get the match from the list as a string.  The string will be formatted per the output requirement.
+        """
+        if (index + 1) > len(self.matches):
+            raise ValueError("index is outside of matches array")
+
+        m = self.matches[index]
+
+        #special handling when match was found in reverse
+        if m.direction == Direction.Backward:
+            local_string = self.toString()[::-1]
+            local_line = self.line[::-1]     #reverse the entire line locally
+        else:
+            local_string = self.toString()
+            local_line = self.line           
+
+        #use the local_string and local_line for results output
+        found_string = local_string[m.startpos:(m.startpos+m.length)]                                #get the substring representing the match
+        found_coords = ','.join( [str(x.coord) for x in local_line[m.startpos:(m.startpos+m.length)]] )  #the coordinates separated by commas
+
+        return "{0}: {1}".format(found_string, found_coords)
