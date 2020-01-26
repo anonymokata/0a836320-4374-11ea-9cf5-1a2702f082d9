@@ -164,3 +164,15 @@ class WordSearchBlock(object):
             posy += yincrement
 
         return WordSearchLine(slashlist)
+
+    def getAllSlices(self):
+        """
+        A helper function to get all types of slices to be used for searching.  Will get rows, columns, and slashes.
+        """
+        allslices = list()
+        allslices.extend([self.getRow(i) for i in range(self.height)])
+        allslices.extend([self.getCol(i) for i in range(self.width)])
+        allslices.extend([self.getFwdSlash(i) for i in range(self.width + self.height - 1)])
+        allslices.extend([self.getBackSlash(i) for i in range(self.width + self.height - 1)])
+        
+        return allslices

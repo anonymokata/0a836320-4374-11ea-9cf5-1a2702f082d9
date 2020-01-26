@@ -97,4 +97,31 @@ class Test_WordSearchBlock:
             assert len(backslash) == lengthtest[i]
             assert backslash.toString() == backslashtests[i]
 
-    
+    def test_get_all_slices(self):
+        """
+        get all slices through the block
+        """
+        slices = self.wsb.getAllSlices()
+        assert len(slices) == 34
+
+    def test_find_words(self):
+        """
+        get all slices through the block
+        """
+        words = ["ADD", "FOOD", "BEEF", "LEER", "REEL", "FAX", "ABS", "XEEZ"]
+        slices = self.wsb.getAllSlices()
+        results = list()
+        for slice in slices:
+            for word in words:
+                if word in slice:
+                    results.append(slice.get_result_as_string(0))
+        
+        assert len(results) == 8
+        assert results[0] == 'FOOD: (0,0),(1,0),(2,0),(3,0)'
+        assert results[1] == 'BEEF: (2,2),(3,2),(4,2),(5,2)'
+        assert results[2] == 'ABS: (0,1),(0,2),(0,3)'
+        assert results[3] == 'XEEZ: (3,4),(3,3),(3,2),(3,1)'
+        assert results[4] == 'LEER: (5,1),(4,2),(3,3),(2,4)'
+        assert results[5] == 'REEL: (2,4),(3,3),(4,2),(5,1)'
+        assert results[6] == 'FAX: (5,2),(4,3),(3,4)'
+        assert results[7] == 'ADD: (0,1),(1,2),(2,3)'
