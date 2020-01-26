@@ -1,7 +1,10 @@
 from enum import Enum, auto
-from XYLines import CoordinateProducer, Direction, XYCoord, LineType
 from WordSearchLetter import WordSearchLetter
 from copy import copy
+
+class Direction(Enum):
+    Forward = auto()
+    Backward = auto()
 
 class WordSearchMatch(object):
     """

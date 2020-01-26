@@ -1,7 +1,6 @@
 import pytest
-from XYLines import CoordinateProducer, Direction, LineType
 from XYCoord import XYCoord
-from WordSearchLine import WordSearchLine
+from WordSearchLine import WordSearchLine, Direction
 from WordSearchLetter import WordSearchLetter
 
 
