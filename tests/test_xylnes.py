@@ -1,6 +1,6 @@
 import pytest
 from XYLines import CoordinateProducer, Direction, XYCoord, LineType
-from WordSearch import WordSearchLine
+from WordSearchLine import WordSearchLine
 
 class TestCoordinateProducer_RowTests:
     def test_getcoords_rowtype_forwardsearch_length_5_start_0_0(self):
