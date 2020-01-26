@@ -22,7 +22,12 @@ class WordSearchLine(object):
     wordstartcoord = None    #the position of the word, if found
     coords = None            #coordinates of the discovered word(s)
 
-    def __init__(self, line:str, linetype:LineType, startcoord:XYCoord):
+    def __init__(self, line:list, linetype:LineType, startcoord:XYCoord):
+        if (type(line) != list):
+            raise ValueError("line argument must contain a list of WordSearchLetter objects")
+        for x in line:
+            if not isinstance(x, WordSearchLetter):
+                raise ValueError("line argument must contain a list of WordSearchLetter objects")
         self.line = line
         self.length = len(line)
         self.linetype = linetype

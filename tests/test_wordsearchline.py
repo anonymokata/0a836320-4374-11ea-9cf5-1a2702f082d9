@@ -1,19 +1,15 @@
 import pytest
-from XYLines import CoordinateProducer, Direction, XYCoord, LineType
+from XYLines import CoordinateProducer, Direction, LineType
+from XYCoord import XYCoord
 from WordSearch import WordSearchLine
 
 
-class TestXYCoord:
-    def test_coord(self):
-        c = XYCoord(5,9)
-        assert c.x == 5
-        assert c.y == 9
-        assert str(c) == "(5,9)"
 
 
 class TestWordSearchLine_BasicTests:
     def test_init(self):
-        wsl = WordSearchLine("ABCHELLOXYZ", LineType.Row, XYCoord(0,0))
+        line = [WordSearchLetter(x, 0, 0) for x in "ABCHELLOXYZ"]
+        wsl = WordSearchLine(line, LineType.Row, XYCoord(0,0))
         assert wsl.line == "ABCHELLOXYZ"
         assert wsl.linetype == LineType.Row
         assert wsl.startcoord.x == 0
