@@ -60,9 +60,11 @@ class Test_WordSearchBlock:
         get all fwd slashes through the block and confirm they all meet length expectations
         """
         lengthtest = [1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1]
+        fwdslashtests = ["F", "AO", "BXO", "SDQD", "XCBZX", "QXDEUY", "QREEL", "QXAF", "QXM", "QX", "Q"]
         for i in range(11):
             fwdslash = self.wsb.getFwdSlash(i)
             assert len(fwdslash) == lengthtest[i]
+            assert fwdslash.toString() == fwdslashtests[i]
 
     def test_get_back_slash(self):
         backslash = self.wsb.getBackSlash(3)
@@ -74,8 +76,11 @@ class Test_WordSearchBlock:
         get all fwd slashes through the block and confirm they all meet length expectations
         """
         lengthtest = [1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1]
+        backslashtests = ["Y", "LX", "FUD", "MEZO", "XAEQO", "QXEBXF", "QXDDA", "QRCB", "QXS", "QX", "Q"]
+
         for i in range(11):
             backslash = self.wsb.getBackSlash(i)
             assert len(backslash) == lengthtest[i]
+            assert backslash.toString() == backslashtests[i]
 
     

@@ -30,6 +30,18 @@ class WordSearchLine(object):
         self.line = line
         return
 
+    def __len__(self):
+        """
+        allows use of len() on this list
+        """
+        return len(self.line)
+
+    def __getitem__(self, index:int):
+        """
+        allows user to use [] when referring to this list
+        """
+        return self.line[index]
+
     def toString(self):
         """
         return a string representation of the WordSearchLetter objects in this list

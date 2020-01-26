@@ -41,10 +41,10 @@ class WordSearchBlock(object):
         self.height = len(letters)
 
     def getRow(self, rownum:int):
-        return list(self.block[rownum])
+        return WordSearchLine(list(self.block[rownum]))
 
     def getCol(self, colnum:int):
-        return [x[colnum] for x in self.block]
+        return WordSearchLine([x[colnum] for x in self.block])
 
     def getFwdSlash(self, slashnum:int):
         """
@@ -104,8 +104,7 @@ class WordSearchBlock(object):
             posx += xincrement
             posy += yincrement
 
-        return slashlist
-
+        return WordSearchLine(slashlist)
 
     def getBackSlash(self, slashnum:int):
         """
@@ -164,4 +163,4 @@ class WordSearchBlock(object):
             posx += xincrement
             posy += yincrement
 
-        return slashlist
+        return WordSearchLine(slashlist)
