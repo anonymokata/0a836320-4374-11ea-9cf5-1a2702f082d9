@@ -9,7 +9,8 @@ class WordSearchBlock(object):
     1a. Validating that the block is sized appropriately
     2. The letters are each represented by WordSearchLetter objects, each is tagged with its position (coordinates) in the grid
     3. The WordSearchBlock object will also be responsible for 'slicing' the block into rows, columns, and diagonal WordSearchLines
-    4. The WordSearchBlock is NOT responsible for solving the puzzle.
+    
+    Note: The WordSearchBlock is NOT responsible for solving the puzzle.
     """
     width = None
     height = None
@@ -41,9 +42,15 @@ class WordSearchBlock(object):
         self.height = len(letters)
 
     def getRow(self, rownum:int):
+        """
+        return a single row from the block
+        """
         return WordSearchLine(list(self.block[rownum]))
 
     def getCol(self, colnum:int):
+        """
+        return a single column from the block
+        """
         return WordSearchLine([x[colnum] for x in self.block])
 
     def getFwdSlash(self, slashnum:int):

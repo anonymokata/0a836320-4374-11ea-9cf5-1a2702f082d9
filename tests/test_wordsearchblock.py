@@ -42,6 +42,9 @@ class Test_WordSearchBlock:
         assert row[3].letter == "Q"
 
     def test_get_all_rows(self):
+        """
+        get all rows and confirm they all meet length and content expectations
+        """
         rowtests = ["FOODXY", "AXQZUL", "BDBEEF", "SCDEAM", "XXRXXX", "QQQQQQ"]
         for i in range(6):
             row = self.wsb.getRow(i)
@@ -58,6 +61,9 @@ class Test_WordSearchBlock:
         assert col[3].letter == "A"
 
     def test_get_all_col(self):
+        """
+        get all columns and confirm they all meet length and content expectations
+        """
         coltests = ["FABSXQ", "OXDCXQ", "OQBDRQ", "DZEEXQ", "XUEAXQ", "YLFMXQ"]
         for i in range(6):
             col = self.wsb.getCol(i)
@@ -71,7 +77,7 @@ class Test_WordSearchBlock:
 
     def test_get_all_fwd_slash(self):
         """
-        get all fwd slashes through the block and confirm they all meet length expectations
+        get all fwd slashes through the block and confirm they all meet length and content expectations
         """
         lengthtest = [1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1]
         fwdslashtests = ["F", "AO", "BXO", "SDQD", "XCBZX", "QXDEUY", "QREEL", "QXAF", "QXM", "QX", "Q"]
@@ -87,7 +93,7 @@ class Test_WordSearchBlock:
 
     def test_get_all_back_slash(self):
         """
-        get all fwd slashes through the block and confirm they all meet length expectations
+        get all fwd slashes through the block and confirm they all meet length and content expectations
         """
         lengthtest = [1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1]
         backslashtests = ["Y", "LX", "FUD", "MEZO", "XAEQO", "QXEBXF", "QXDDA", "QRCB", "QXS", "QX", "Q"]

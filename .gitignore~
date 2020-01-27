@@ -1,0 +1,4 @@
+*.pyc
+*.udb
+/.eggs
+/htmlcov
