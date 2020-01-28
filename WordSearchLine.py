@@ -1,6 +1,5 @@
 from enum import Enum, auto
 from WordSearchLetter import WordSearchLetter
-from copy import copy
 
 class Direction(Enum):
     Forward = auto()
@@ -17,9 +16,8 @@ class WordSearchMatch(object):
 
 class WordSearchLine(object):
     """
-    The WordSearchLine object is an abstraction of a "line of text".  
-    This particular line of text, however, originated from a WordSearch puzzle game.
-    The line will be instantiated with a list of WordSearchLetter objects.
+    The WordSearchLine object is an abstraction of a "line of text" from a WordSearchBlock.
+    The line will be instantiated with a list of WordSearchLetter objects, each of which will be tagged with a coordinate.
     """
     line = None              #the actual line, the entire line from the word search block, as WordSearchLetter instances
     matches = None           #list of discovered matches
