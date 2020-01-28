@@ -45,6 +45,12 @@ class WordSearchLine(object):
         """
         return self.line[index]
 
+    def __str__(self):
+        """
+        allows the user to get this line as a string
+        """
+        return self.toString()
+
     def toString(self):
         """
         return a string representation of the WordSearchLetter objects in this list

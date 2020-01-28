@@ -16,3 +16,11 @@ class TestXYCoord:
         with pytest.raises(ValueError) as e:
             c = XYCoord(1.1, 0.2)
         assert "must be integers" in str(e.value)
+
+    def test_coord_equality(self):
+        foo = XYCoord(6,-7)
+        bar = XYCoord(6,-7)
+        fizz = XYCoord(1,1)
+        assert foo == bar
+        assert foo != fizz
+        assert bar != fizz

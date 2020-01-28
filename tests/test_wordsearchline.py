@@ -25,6 +25,11 @@ class TestWordSearchLine_BasicTests:
         wsl = WordSearchLine(line)
         assert wsl.toString() == "ABCHELLOXYZ"
 
+    def test_getstring_native(self):
+        line = [WordSearchLetter(x, XYCoord(0, 0)) for x in "ABCHELLOXYZ"]
+        wsl = WordSearchLine(line)
+        assert str(wsl) == "ABCHELLOXYZ"    
+
     def test_membership(self):
         """
         check that the word "HELLO" is discovered in the line in forward direction

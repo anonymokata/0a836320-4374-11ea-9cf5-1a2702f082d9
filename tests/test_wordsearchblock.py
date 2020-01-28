@@ -2,6 +2,7 @@ import pytest
 from WordSearchLetter import WordSearchLetter
 from WordSearchLine import WordSearchLine
 from WordSearchBlock import WordSearchBlock
+from XYCoord import XYCoord
 
 class Test_WordSearchBlock:
     def setup_class(self):
@@ -132,6 +133,43 @@ class Test_WordSearchBlock:
         assert results[6] == 'FAX: (5,2),(4,3),(3,4)'
         assert results[7] == 'ADD: (0,1),(1,2),(2,3)'
 
+class TestSlices:
+    def setup_class(self):
+        self.rawblock = list()
+        #Words in here are:  FOOD, ADD, BEEF, LEER, CELERY
+        #this is a rectangular block
+        self.rawblock.append("F,O,O,D,X,Y,C,D".split(","))
+        self.rawblock.append("A,X,Q,Z,U,L,E,F".split(","))
+        self.rawblock.append("B,D,B,E,E,F,L,R".split(","))
+        self.rawblock.append("S,C,D,E,A,M,E,I".split(","))
+        self.rawblock.append("X,X,R,X,X,X,R,Y".split(","))
+        self.rawblock.append("Q,Q,Q,Q,Q,Q,Y,Z".split(","))
+        self.wsb = WordSearchBlock(self.rawblock)
+    
+    def test_get_fwdslash_startpos(self):
+        assert self.wsb.getFwdSlashStartPos(0) == XYCoord(0,0)
+        assert self.wsb.getFwdSlashStartPos(5) == XYCoord(0,5)
+        assert self.wsb.getFwdSlashStartPos(6) == XYCoord(1,5)
+        assert self.wsb.getFwdSlashStartPos(7) == XYCoord(2,5)
+        assert self.wsb.getFwdSlashStartPos(8) == XYCoord(3,5)
+        assert self.wsb.getFwdSlashStartPos(9) == XYCoord(4,5)
+        assert self.wsb.getFwdSlashStartPos(12) == XYCoord(7,5)
+
+    def test_get_backslash_startpos(self):
+        assert self.wsb.getBackSlashStartPos(0) == XYCoord(7,0)
+        assert self.wsb.getBackSlashStartPos(5) == XYCoord(7,5)
+        assert self.wsb.getBackSlashStartPos(6) == XYCoord(6,5)
+        assert self.wsb.getBackSlashStartPos(7) == XYCoord(5,5)
+        assert self.wsb.getBackSlashStartPos(8) == XYCoord(4,5)
+        assert self.wsb.getBackSlashStartPos(9) == XYCoord(3,5)
+        assert self.wsb.getBackSlashStartPos(12) == XYCoord(0,5)
+
+
+    def test_slice_startval_test(self):
+        s = self.wsb.getFwdSlash(6)
+        assert str(s) == "QREELC"
+
+
 class TestInitFailures:
     def test_word_search_block_init_fail(self):
         """
@@ -149,19 +187,3 @@ class TestInitFailures:
         with pytest.raises(ValueError) as e:
             wsb = WordSearchBlock(rawblock)
         assert "length of each row of letters must be the same" in str(e.value)       
-
-    def test_word_search_block_init_fail_height(self):
-        """
-        Try to init with unequal height
-        """
-        rawblock = list()
-        #Words in here are:  FOOD, ADD, BEEF, LEER
-        rawblock.append("F,O,O,D,X,Y".split(","))
-        rawblock.append("A,X,Z,U,L,A".split(","))
-        rawblock.append("B,D,B,E,E,F".split(","))
-        rawblock.append("S,C,D,E,A,M".split(","))
-        rawblock.append("X,X,R,X,X,X".split(","))
-
-        with pytest.raises(ValueError) as e:
-            wsb = WordSearchBlock(rawblock)
-        assert "The length of each row of letters must match the height of the block" in str(e.value)     
