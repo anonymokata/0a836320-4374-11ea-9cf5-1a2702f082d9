@@ -5,6 +5,9 @@ from WordSearchBlock import WordSearchBlock
 from XYCoord import XYCoord
 
 class Test_WordSearchBlock:
+    """
+    Set up a block that we will used for testing in this test class
+    """
     def setup_class(self):
         self.rawblock = list()
         #Words in here are:  FOOD, ADD, BEEF, LEER
@@ -21,6 +24,9 @@ class Test_WordSearchBlock:
         assert self.wsb.height == 6
 
     def test_get_coordinate(self):
+        """
+        Confirm that coordinates are mapped as expected
+        """
         assert self.wsb.block[0][0].coord.x == 0
         assert self.wsb.block[0][0].coord.y == 0
         assert self.wsb.block[0][0].letter == "F"
@@ -34,6 +40,9 @@ class Test_WordSearchBlock:
         assert self.wsb.block[5][5].letter == "Q"
 
     def test_get_row(self):
+        """
+        Get a row from the puzzle
+        """
         row = self.wsb.getRow(0)
         assert len(row) == 6
         assert row[0].letter == "F"
@@ -53,6 +62,9 @@ class Test_WordSearchBlock:
             assert row.toString() == rowtests[i]
 
     def test_get_col(self):
+        """
+        Get a column from the puzzle
+        """
         col = self.wsb.getCol(1)
         assert len(col) == 6
         assert col[3].letter == "C"
@@ -72,6 +84,9 @@ class Test_WordSearchBlock:
             assert col.toString() == coltests[i]
 
     def test_get_fwd_slash(self):
+        """
+        Get a particular fwd slash out of the puzzle
+        """
         fwdslash = self.wsb.getFwdSlash(3)
         assert len(fwdslash) == 4
         assert fwdslash[3].letter == "D"
@@ -88,6 +103,9 @@ class Test_WordSearchBlock:
             assert fwdslash.toString() == fwdslashtests[i]
 
     def test_get_back_slash(self):
+        """
+        Get a single backslash
+        """
         backslash = self.wsb.getBackSlash(3)
         assert len(backslash) == 4
         assert backslash[3].letter == "O"
@@ -113,7 +131,7 @@ class Test_WordSearchBlock:
 
     def test_find_words(self):
         """
-        get all slices through the block
+        get all slices through the block, I'm testing all possible solutions here
         """
         words = ["ADD", "FOOD", "BEEF", "LEER", "REEL", "FAX", "ABS", "XEEZ"]
         slices = self.wsb.getAllSlices()
@@ -134,6 +152,9 @@ class Test_WordSearchBlock:
         assert results[7] == 'ADD: (0,1),(1,2),(2,3)'
 
 class TestSlices:
+    """
+    set up a WordSearchBlock object that we will beat on with tests below
+    """
     def setup_class(self):
         self.rawblock = list()
         #Words in here are:  FOOD, ADD, BEEF, LEER, CELERY
@@ -147,6 +168,11 @@ class TestSlices:
         self.wsb = WordSearchBlock(self.rawblock)
     
     def test_get_fwdslash_startpos(self):
+        """
+        Get start positions for various forward slashes in the puzzle.
+        I'm testing with a rectangular puzzle to ensure the code is robust
+        enough to handle other puzzle dimensions other that square.
+        """
         assert self.wsb.getFwdSlashStartPos(0) == XYCoord(0,0)
         assert self.wsb.getFwdSlashStartPos(5) == XYCoord(0,5)
         assert self.wsb.getFwdSlashStartPos(6) == XYCoord(1,5)
@@ -156,6 +182,9 @@ class TestSlices:
         assert self.wsb.getFwdSlashStartPos(12) == XYCoord(7,5)
 
     def test_get_backslash_startpos(self):
+        """
+        testing backslash start positions as above
+        """
         assert self.wsb.getBackSlashStartPos(0) == XYCoord(7,0)
         assert self.wsb.getBackSlashStartPos(5) == XYCoord(7,5)
         assert self.wsb.getBackSlashStartPos(6) == XYCoord(6,5)
@@ -164,8 +193,10 @@ class TestSlices:
         assert self.wsb.getBackSlashStartPos(9) == XYCoord(3,5)
         assert self.wsb.getBackSlashStartPos(12) == XYCoord(0,5)
 
-
     def test_slice_startval_test(self):
+        """
+        Rip a specific fwd slash out of the puzzle and confirm it is correct.
+        """
         s = self.wsb.getFwdSlash(6)
         assert str(s) == "QREELC"
 
