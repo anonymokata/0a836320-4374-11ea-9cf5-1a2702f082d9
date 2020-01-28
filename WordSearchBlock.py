@@ -1,3 +1,4 @@
+from copy import copy
 from XYCoord import XYCoord
 from WordSearchLetter import WordSearchLetter
 from WordSearchLine import WordSearchLine
@@ -21,20 +22,20 @@ class WordSearchBlock(object):
         Init the WordSearchBlock with a two-dimensional array of lists.  The list returned by letters[0] is the top line of the puzzle.
         """
         self.block = list()
+        coord = XYCoord(0,0)        
 
-        y = 0
         for row in letters:
             if len(row) != len(letters[0]):
                 raise ValueError("The length of each row of letters must be the same.")
 
-            x = 0
+            coord.x = 0
             newrow = list()
             for let in row:
-                newrow.append(WordSearchLetter(let, XYCoord(x,y)))
-                x += 1
+                newrow.append(WordSearchLetter(let, copy(coord)))
+                coord.x += 1
 
             self.block.append(newrow)
-            y += 1
+            coord.y += 1
         
         self.width = len(letters[0])
         self.height = len(letters)
