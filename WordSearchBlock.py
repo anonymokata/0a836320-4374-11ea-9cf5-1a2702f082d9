@@ -22,7 +22,7 @@ class WordSearchBlock(object):
         Init the WordSearchBlock with a two-dimensional array of lists.  The list returned by letters[0] is the top line of the puzzle.
         """
         self.block = list()
-        coord = XYCoord(0,0)        
+        coord = XYCoord(0,0)
 
         for row in letters:
             if len(row) != len(letters[0]):
@@ -50,7 +50,7 @@ class WordSearchBlock(object):
         """
         return a single column from the block
         """
-        return WordSearchLine([x[colnum] for x in self.block])
+        return WordSearchLine([row[colnum] for row in self.block])
 
     def getFwdSlashStartPos(self, slashnum:int):
         """
