@@ -218,3 +218,51 @@ class TestInitFailures:
         with pytest.raises(ValueError) as e:
             wsb = WordSearchBlock(rawblock)
         assert "length of each row of letters must be the same" in str(e.value)       
+
+    def test_word_search_block_init_fail_with_non_alpha_char(self):
+        """
+        Try to init with unequal rows
+        """
+        rawblock = list()
+        #Words in here are:  FOOD, ADD, BEEF, LEER
+        rawblock.append("F,O,O,D,X,Y".split(","))
+        rawblock.append("A,X,Z,U,L,1".split(","))
+        rawblock.append("B,D,B,E,E,F".split(","))
+        rawblock.append("S,C,D,E,A,M".split(","))
+        rawblock.append("X,X,R,X,X,X".split(","))
+        rawblock.append("Q,Q,Q,Q,Q,Q".split(","))
+
+        with pytest.raises(ValueError) as e:
+            wsb = WordSearchBlock(rawblock)
+        assert "A WordSearchLetter must be a capital letter A-Z" in str(e.value)   
+
+
+
+class TestTinyBlock:
+    def test_word_search_block_2x2(self):
+        """
+        Create a tiny block 2x2
+        """
+        rawblock = list()
+        #Words in here are:  TX, AX, TO
+        rawblock.append("T,O".split(","))
+        rawblock.append("A,X".split(","))
+
+        wsb = WordSearchBlock(rawblock)
+        assert wsb.height == 2
+        assert wsb.width == 2
+        slices = wsb.getAllSlices()
+        assert len(slices) == 10
+
+    def test_word_search_block_1x1(self):
+        """
+        Create a tiny block 1x1
+        """
+        rawblock = list()
+        #Words in here are:  TX, AX, TO
+        rawblock.append("T".split(","))
+        
+        wsb = WordSearchBlock(rawblock)
+        assert wsb.height == 1 
+        assert wsb.width == 1 
+
