@@ -1,5 +1,0 @@
-setup.py
-WordSearchKata.egg-info/PKG-INFO
-WordSearchKata.egg-info/SOURCES.txt
-WordSearchKata.egg-info/dependency_links.txt
-WordSearchKata.egg-info/top_level.txt

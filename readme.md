@@ -5,6 +5,8 @@ See: https://github.com/PillarTechnology/kata-word-search
 
 ## Requirements
 Python 3.x (Python 3.7 was used for development)
+pytest
+pytest-cov
 
 ## Running
 You can import WordSearchSolver in your project, or you can run WordSearchSolver.py from the commandline:
@@ -15,12 +17,19 @@ The test case "carparts_hard_from_pdf.txt" is taken from https://www.brainzilla.
 ### Running Tests
 I usually use the built-in unittest framework that Python offers, but for this exercise I decided to try out pytest.  
 
-To run tests you can do:
-```setup.py pytest```
+Install pytest with pip:  pip install pytest
 
-...or simply ```pytest``` should also work.
+And then just run pytest:
+```pytest```
+
+![pytest example](images/pytest.png)
 
 To get coverage, you can do:
 ```pytest --cov```
 
-...or if you want a nice html report, try: ```pytest --cov --cov-report=html```
+![pytest cov example](images/pytest_cov.png)
+
+For a nice html report of each line of coverage:
+```pytest --cov --cov-report=html```
+
+![pytest cov html example](images/pytest_cov_html.png)
